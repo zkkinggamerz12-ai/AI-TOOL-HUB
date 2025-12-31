@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Hub - Clean Access Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c1a25 0%, #1a2d3d 50%, #0c1a25 100%);
+            color: #e8f4fc;
+            min-height: 100vh;
+            padding-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 114, 255, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #a0d2ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            color: #8ab4f8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .tool-card {
+            background: rgba(18, 30, 44, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 198, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-header {
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+        }
+        
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .temp-mail .icon-wrapper {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        }
+        
+        .temp-mail-io .icon-wrapper {
+            background: linear-gradient(135deg, #36D1DC, #5B86E5);
+        }
+        
+        .temp-mail-plus .icon-wrapper {
+            background: linear-gradient(135deg, #FF5F6D, #FFC371);
+        }
+        
+        .eleven-labs .icon-wrapper {
+            background: linear-gradient(135deg, #1d976c, #93f9b9);
+        }
+        
+        .leonardo .icon-wrapper {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        }
+        
+        .hailuo .icon-wrapper {
+            background: linear-gradient(135deg, #ff5e62, #ff9966);
+        }
+        
+        .tool-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .tool-desc {
+            font-size: 0.95rem;
+            color: #a0c8ff;
+            opacity: 0.9;
+        }
+        
+        .card-content {
+            padding: 0 25px 25px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            color: #c2d9ff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .features li i {
+            color: #00c6ff;
+            font-size: 0.8rem;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, rgba(0, 114, 255, 0.15), rgba(0, 198, 255, 0.15));
+            color: #4db8ff;
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            background: linear-gradient(to right, rgba(0, 114, 255, 0.25), rgba(0, 198, 255, 0.25));
+            color: #80ccff;
+            border-color: rgba(0, 198, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn i {
+            font-size: 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 50px 0 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison {
+            background: rgba(18, 30, 44, 0.6);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .comparison h3 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .comparison-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .comparison-item h4 {
+            color: #4db8ff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .comparison-item ul {
+            list-style: none;
+        }
+        
+        .comparison-item li {
+            color: #a0c8ff;
+            font-size: 0.9rem;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .comparison-item li:last-child {
+            border-bottom: none;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .badge-new {
+            background: linear-gradient(135deg, #ff5e62, #ff9966);
+            color: white;
+        }
+        
+        .badge-alt {
+            background: rgba(0, 198, 255, 0.2);
+            color: #00c6ff;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6c8ab8;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: #8ab4f8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #4db8ff;
+        }
+        
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tool-card {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        .tool-card:nth-child(1) { animation-delay: 0.1s; }
+        .tool-card:nth-child(2) { animation-delay: 0.2s; }
+        .tool-card:nth-child(3) { animation-delay: 0.3s; }
+        .tool-card:nth-child(4) { animation-delay: 0.4s; }
+        .tool-card:nth-child(5) { animation-delay: 0.5s; }
+        .tool-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        /* Glass effect for cards */
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: -1;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h1>AI Tools Hub</h1>
+            <p class="tagline">Access premium AI tools instantly. No registration required.</p>
+        </header>
+        
+        <main>
+            <!-- AI Content Tools -->
+            <h2 class="section-title">AI Content Creation</h2>
+            <div class="main-grid">
+                <!-- Eleven Labs -->
+                <div class="tool-card eleven-labs">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <h3 class="tool-title">Eleven Labs</h3>
+                        <p class="tool-desc">AI voice generation & text-to-speech</p>
+                    </div>
+                    <div class="card-content">
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> Realistic voice cloning</li>
+                            <li><i class="fas fa-check"></i> Multiple languages</li>
+                            <li><i class="fas fa-check"></i> Emotion control</li>
+                            <li><i class="fas fa-check"></i> Commercial ready</li>
+                        </ul>
+                        <button class="action-btn" onclick="window.open('https://elevenlabs.io/', '_blank')">
+                            <i class="fas fa-external-link-alt"></i> Open Eleven Labs
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Leonardo AI -->
+                <div class="tool-card leonardo">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 class="tool-title">Leonardo AI</h3>
+                        <p class="tool-desc">AI image generation & art</p>
+                    </div>
+                    <div class="card-content">
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> Text-to-image generation</li>
+                            <li><i class="fas fa-check"></i> Photo-realistic outputs</li>
+                            <li><i class="fas fa-check"></i> Custom model training</li>
+                            <li><i class="fas fa-check"></i> Batch processing</li>
+                        </ul>
+                        <button class="action-btn" onclick="window.open('https://leonardo.ai/', '_blank')">
+                            <i class="fas fa-external-link-alt"></i> Open Leonardo AI
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hailuo AI -->
+                <div class="tool-card hailuo">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3 class="tool-title">Hailuo AI <span class="badge badge-new">NEW</span></h3>
+                        <p class="tool-desc">Image-to-video animation</p>
+                    </div>
+                    <div class="card-content">
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> Image animation</li>
+                            <li><i class="fas fa-check"></i> Multiple motion styles</li>
+                            <li><i class="fas fa-check"></i> 4K video output</li>
+                            <li><i class="fas fa-check"></i> Social media ready</li>
+                        </ul>
+                        <button class="action-btn" onclick="window.open('https://hailuoai.video/create/image-to-video', '_blank')">
+                            <i class="fas fa-external-link-alt"></i> Open Hailuo AI
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Temporary Email Services -->
+            <h2 class="section-title">Temporary Email Services</h2>
+            <div class="main-grid">
+                <!-- Temp-Mail.org -->
+                <div class="tool-card temp-mail">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="tool-title">Temp-Mail.org</h3>
+                        <p class="tool-desc">Original temporary email service</p>
+                    </div>
+                    <div class="card-content">
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> Instant generation</li>
+                            <li><i class="fas fa-check"></i> 10+ domain options</li>
+                            <li><i class="fas fa-check"></i> Email forwarding</li>
+                            <li><i class="fas fa-check"></i> Mobile friendly</li>
+                        </ul>
+                        <button class="action-btn" onclick="window.open('https://temp-mail.org/en/', '_blank')">
+                            <i class="fas fa-external-link-alt"></i> Open Temp-Mail.org
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Temp-Mail.io -->
+                <div class="tool-card temp-mail-io">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <h3 class="tool-title">Temp-Mail.io <span class="badge badge-alt">RECOMMENDED</span></h3>
+                        <p class="tool-desc">Modern email with 24-hour duration</p>
+                    </div>
+                    <div class="card-content">
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> 24-hour emails</li>
+                            <li><i class="fas fa-check"></i> Attachment support</li>
+                            <li><i class="fas fa-check"></i> Clean interface</li>
+                            <li><i class="fas fa-check"></i> Ad-free experience</li>
+                        </ul>
+                        <button class="action-btn" onclick="window.open('https://temp-mail.io/en', '_blank')">
+                            <i class="fas fa-external-link-alt"></i> Open Temp-Mail.io
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- TempMailo.com -->
+                <div class="tool-card temp-mail-plus">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-mail-forward"></i>
+                        </div>
+                        <h3 class="tool-title">TempMailo.com</h3>
+                        <p class="tool-desc">Simple & reliable temporary email</p>
+                    </div>
+                    <div class="card-content">
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> Simple interface</li>
+                            <li><i class="fas fa-check"></i> Fast generation</li>
+                            <li><i class="fas fa-check"></i> Reliable service</li>
+                            <li><i class="fas fa-check"></i> Minimal ads</li>
+                        </ul>
+                        <button class="action-btn" onclick="window.open('https://tempmailo.com/', '_blank')">
+                            <i class="fas fa-external-link-alt"></i> Open TempMailo.com
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service Comparison -->
+            <div class="comparison">
+                <h3><i class="fas fa-chart-bar"></i> Service Comparison</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4>Temp-Mail.org</h4>
+                        <ul>
+                            <li>• 1-hour email duration</li>
+                            <li>• Best for quick verifications</li>
+                            <li>• Most domain options</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Temp-Mail.io</h4>
+                        <ul>
+                            <li>• 24-hour email duration</li>
+                            <li>• Best for longer projects</li>
+                            <li>• Clean modern interface</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>TempMailo.com</h4>
+                        <ul>
+                            <li>• 2-hour email duration</li>
+                            <li>• Simple & reliable</li>
+                            <li>• Fast email generation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>AI Tools Hub &copy; 2024 | All tools open in new tabs for optimal functionality</p>
+            <p style="margin-top: 10px; color: #6c8ab8; font-size: 0.8rem;">
+                Note: Some services may require login for full functionality
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Add smooth hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.tool-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // Add keyboard navigation support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const focusedElement = document.activeElement;
+                    if (focusedElement.classList.contains('action-btn')) {
+                        focusedElement.click();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
